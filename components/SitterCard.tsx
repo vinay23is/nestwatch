@@ -4,44 +4,45 @@ import type { Sitter } from "@/lib/data";
 
 export default function SitterCard({ sitter }: { sitter: Sitter }) {
   return (
-    <Link href={`/sitter/${sitter.id}`} className="block bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow overflow-hidden group">
-      <div className="bg-gradient-to-br from-violet-100 to-purple-100 h-28 flex items-center justify-center relative">
-        <div className="w-16 h-16 rounded-full bg-violet-600 text-white flex items-center justify-center text-xl font-bold shadow-md">
-          {sitter.avatar}
-        </div>
-        {sitter.availableTonight && (
-          <span className="absolute top-3 right-3 bg-green-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full">
-            Available tonight
-          </span>
-        )}
-      </div>
-      <div className="p-4">
-        <div className="flex items-start justify-between mb-1">
-          <div>
-            <p className="font-bold text-gray-900">{sitter.name}</p>
-            <p className="text-xs text-gray-400">{sitter.experience} yrs experience</p>
+    <Link href={`/sitter/${sitter.id}`} className="block bg-white rounded-2xl border border-stone-200 hover:border-stone-300 hover:shadow-sm transition-all overflow-hidden group">
+      <div className="p-5">
+        <div className="flex items-start gap-3 mb-3">
+          <div className="w-12 h-12 rounded-xl bg-stone-100 text-stone-600 flex items-center justify-center text-sm font-black shrink-0">
+            {sitter.avatar}
           </div>
-          <p className="text-violet-600 font-bold text-sm">${sitter.hourlyRate}/hr</p>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-start justify-between gap-2">
+              <p className="font-bold text-gray-900 truncate">{sitter.name}</p>
+              <p className="text-sm font-bold text-gray-800 shrink-0">${sitter.hourlyRate}<span className="text-gray-400 font-normal text-xs">/hr</span></p>
+            </div>
+            <div className="flex items-center gap-2 text-xs text-gray-400 mt-0.5">
+              <span className="flex items-center gap-0.5 text-yellow-500 font-bold">
+                <Star className="w-3 h-3 fill-yellow-400" />{sitter.rating}
+              </span>
+              <span className="text-stone-300">·</span>
+              <span>{sitter.reviewCount} reviews</span>
+              <span className="text-stone-300">·</span>
+              <span className="flex items-center gap-0.5"><MapPin className="w-3 h-3" />{sitter.distance} mi</span>
+            </div>
+          </div>
         </div>
-        <div className="flex items-center gap-3 text-xs text-gray-500 mb-3">
-          <span className="flex items-center gap-1">
-            <Star className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
-            {sitter.rating} ({sitter.reviewCount})
-          </span>
-          <span className="flex items-center gap-1">
-            <MapPin className="w-3.5 h-3.5" /> {sitter.distance} mi
-          </span>
-        </div>
-        <p className="text-xs text-gray-500 line-clamp-2 mb-3">{sitter.bio}</p>
-        <div className="flex gap-2 flex-wrap">
+
+        <p className="text-xs text-gray-500 leading-relaxed line-clamp-2 mb-3">{sitter.bio}</p>
+
+        <div className="flex items-center gap-2 flex-wrap">
+          {sitter.availableTonight && (
+            <span className="bg-green-50 text-green-700 text-xs px-2 py-0.5 rounded-md font-semibold border border-green-100">
+              Free tonight
+            </span>
+          )}
           {sitter.backgroundCheck && (
-            <span className="flex items-center gap-1 bg-green-50 text-green-700 text-xs px-2 py-0.5 rounded-full font-medium">
-              <ShieldCheck className="w-3 h-3" /> Verified
+            <span className="flex items-center gap-1 text-gray-400 text-xs">
+              <ShieldCheck className="w-3 h-3 text-green-500" /> Checked
             </span>
           )}
           {sitter.cameraVerified && (
-            <span className="flex items-center gap-1 bg-violet-50 text-violet-700 text-xs px-2 py-0.5 rounded-full font-medium">
-              <Camera className="w-3 h-3" /> Camera
+            <span className="flex items-center gap-1 text-gray-400 text-xs">
+              <Camera className="w-3 h-3 text-orange-400" /> Camera
             </span>
           )}
         </div>
